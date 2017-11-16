@@ -9,7 +9,7 @@ const router = Router();
 router.post('/add', (req, res) => {
   let newContact = new Contact(req.body);
   newContact.save((err, contact) => {
-    if (err) res.send(err);
+    if (err) return res.send(err);
     res.redirect('http://localhost:3000');
   });
 });
