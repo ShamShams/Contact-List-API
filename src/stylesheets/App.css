@@ -23,7 +23,7 @@
 
 .List {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

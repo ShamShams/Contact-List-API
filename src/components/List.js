@@ -14,7 +14,7 @@ class List extends Component {
             {contact.telephone.mobile} <br/>
             {contact.telephone.work} <br/>
             <a href={`http://localhost:3012/listeContact/${contact._id}/delete`}>
-              <RaisedButton type="submit" label="Supprimer" secondary={true} />
+              <RaisedButton type="submit" label="Supprimer" secondary={true} style={{ marginTop: 10 }}/>
             </a>
           </div>
           )}

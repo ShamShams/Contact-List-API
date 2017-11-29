@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // Material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import TextField from 'material-ui/TextField';
 
 // Components
 import Form from './Form';
@@ -12,11 +12,9 @@ import List from './List';
 import '../stylesheets/App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       contacts: [],
-    };
+      contactList: []
   }
 
   componentDidMount() {
@@ -25,19 +23,30 @@ class App extends Component {
     fetch(contactsUrl)
       .then(res => res.json())
       .then(result => {
-        this.setState({
-          contacts: result
-        })
+        this.setState({ contacts: result, contactList: result })
         console.log(this.state.contacts);
       })
       .catch((res, err) => res.send(err));
+  }
+
+  handleChange = (e) => {
+    e.target.value === '' ?
+      this.setState({ contactList: this.state.contacts })
+      :
+      this.setState({ contactList: this.state.contacts.filter(contact =>       contact.prenom.includes(e.target.value)
+        || contact.nom.includes(e.target.value)
+      )})
   }
 
   render() {
     return (
       <MuiThemeProvider className="App">
         <Form />
-        <List contacts={this.state.contacts}/>
+        <TextField
+          hintText="Rechercher un contact"
+          style={{ marginLeft: 20, marginTop: 20 }}
+          onChange={this.handleChange}/>
+        <List contacts={this.state.contactList}/>
       </MuiThemeProvider>
     );
   }
